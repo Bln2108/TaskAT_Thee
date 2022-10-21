@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,14 +21,15 @@ public class СlassTest {
     static void setupAll() {
         WebDriverManager.chromedriver().setup();
 
-    /*@BeforeAll
-    static void setUpAll() {
-        System.setProperty("webdriver.chrome.driver", "./driver/win/chromedriver.exe"); */
     }
 
     @BeforeEach
-    void setUp() {
-        driver = new ChromeDriver();
+    public void setUp() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
     }
 
     @AfterEach
